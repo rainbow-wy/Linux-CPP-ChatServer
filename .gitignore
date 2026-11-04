@@ -1,0 +1,19 @@
+# 编译产生的目标文件
+*.o
+*.obj
+*.out
+
+# 编译生成的可执行文件
+charclient
+chatclient
+chatserver
+server
+client
+a.out
+
+# 构建目录
+build/
+cmake-build-*/
+
+# 日志文件
+*.log
