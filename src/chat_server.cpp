@@ -208,7 +208,7 @@ void ChatServer::acceptClients() {
 
         // 注册客户端事件
         epoll_event clientEv{};
-        clientEv.events = EPOLLIN;
+        clientEv.events = EPOLLIN | EPOLLRDHUP;//关注可读事件和对端关闭发送的事件
         clientEv.data.fd = connFd;
 
         //将connfd注册到epoll
@@ -432,7 +432,7 @@ bool ChatServer::modifyEpollEvents(int fd,std::uint32_t events) {
 
     epoll_event ev{};
 
-    ev.events = events;
+    ev.events = events | EPOLLRDHUP;
     ev.data.fd = fd;
 
     if (epoll_ctl(epollFd_,EPOLL_CTL_MOD,fd, &ev) == -1) {
